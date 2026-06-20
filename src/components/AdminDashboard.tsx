@@ -78,7 +78,12 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
       setIsAuthenticated(true);
       loadBookings();
     } catch (err: any) {
-      setError(err?.message || 'Login failed. Please try again.');
+      console.error("Login error caught:", err);
+      const errMsg = err?.message && typeof err.message === 'string' ? err.message :
+                     err?.error_description && typeof err.error_description === 'string' ? err.error_description :
+                     typeof err === 'object' && err !== null ? JSON.stringify(err) :
+                     String(err);
+      setError(errMsg || 'Login failed. Please try again.');
       setPassword('');
     }
   };
@@ -257,6 +262,12 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                 </button>
               </div>
             </form>
+            
+            {/* Diagnostics for setup verification */}
+            <div className="mt-6 pt-4 border-t border-forest/10 text-[10px] text-forest/40 text-center font-mono space-y-1">
+              <div>URL: {process.env.NEXT_PUBLIC_SUPABASE_URL ? `${process.env.NEXT_PUBLIC_SUPABASE_URL.substring(0, 22)}...` : 'MISSING'}</div>
+              <div>KEY: {process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? `${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY.substring(0, 18)}...` : 'MISSING'}</div>
+            </div>
           </div>
         ) : (
           /* Dashboard View */
