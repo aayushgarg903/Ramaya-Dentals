@@ -222,6 +222,7 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-2xl border border-forest/20 bg-white py-4 px-5 text-forest outline-none focus:border-forest focus:ring-2 focus:ring-forest/15 transition-all text-sm font-medium"
+                  autoComplete="off"
                   required
                 />
               </div>
@@ -234,6 +235,7 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded-2xl border border-forest/20 bg-white py-4 px-5 text-forest outline-none focus:border-forest focus:ring-2 focus:ring-forest/15 transition-all text-sm font-medium"
+                  autoComplete="new-password"
                   required
                 />
                 {error && <p className="text-red-600 text-xs mt-2 font-semibold text-center">{error}</p>}
