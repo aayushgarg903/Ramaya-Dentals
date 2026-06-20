@@ -21,7 +21,7 @@ export interface AdminDashboardProps {
 }
 
 export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
-  const [email, setEmail] = useState<string>(CLINIC_CONFIG.adminEmail);
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -218,7 +218,7 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                 <label className="block text-xs font-bold text-forest uppercase tracking-wider mb-1.5">Email Address</label>
                 <input 
                   type="email" 
-                  placeholder={CLINIC_CONFIG.adminEmail}
+                  placeholder="Enter admin email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-2xl border border-forest/20 bg-white py-4 px-5 text-forest outline-none focus:border-forest focus:ring-2 focus:ring-forest/15 transition-all text-sm font-medium"
@@ -230,7 +230,7 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                 <label className="block text-xs font-bold text-forest uppercase tracking-wider mb-1.5">Password</label>
                 <input 
                   type="password" 
-                  placeholder="Enter Password (hint: SmilixAdmin123!)"
+                  placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded-2xl border border-forest/20 bg-white py-4 px-5 text-forest outline-none focus:border-forest focus:ring-2 focus:ring-forest/15 transition-all text-sm font-medium"
