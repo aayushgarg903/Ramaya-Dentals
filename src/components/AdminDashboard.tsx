@@ -79,10 +79,32 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
       loadBookings();
     } catch (err: any) {
       console.error("Login error caught:", err);
-      const errMsg = err?.message && typeof err.message === 'string' ? err.message :
-                     err?.error_description && typeof err.error_description === 'string' ? err.error_description :
-                     typeof err === 'object' && err !== null ? JSON.stringify(err) :
-                     String(err);
+      let errMsg = '';
+      if (err === null || err === undefined) {
+        errMsg = 'null/undefined error';
+      } else if (typeof err === 'string') {
+        errMsg = err;
+      } else {
+        // Build a detailed error description including non-enumerable properties
+        const details: any = {};
+        Object.getOwnPropertyNames(err).forEach(key => {
+          try {
+            details[key] = String(err[key]);
+          } catch (e) {}
+        });
+        
+        // Include any regular enumerable properties
+        Object.keys(err).forEach(key => {
+          if (!(key in details)) {
+            try {
+              details[key] = String(err[key]);
+            } catch (e) {}
+          }
+        });
+        
+        errMsg = details.message || details.error_description || JSON.stringify(details);
+      }
+      
       setError(errMsg || 'Login failed. Please try again.');
       setPassword('');
     }
