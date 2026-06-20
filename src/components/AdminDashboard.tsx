@@ -244,12 +244,14 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
               <div>
                 <label className="block text-xs font-bold text-forest uppercase tracking-wider mb-1.5">Email Address</label>
                 <input 
-                  type="email" 
+                  type="text" 
+                  name="admin_username_field"
+                  id="admin_username_field"
                   placeholder="Enter admin email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-2xl border border-forest/20 bg-white py-4 px-5 text-forest outline-none focus:border-forest focus:ring-2 focus:ring-forest/15 transition-all text-sm font-medium"
-                  autoComplete="off"
+                  autoComplete="new-password"
                   required
                 />
               </div>
@@ -258,6 +260,8 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                 <label className="block text-xs font-bold text-forest uppercase tracking-wider mb-1.5">Password</label>
                 <input 
                   type="password" 
+                  name="admin_password_field"
+                  id="admin_password_field"
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -284,12 +288,6 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                 </button>
               </div>
             </form>
-            
-            {/* Diagnostics for setup verification */}
-            <div className="mt-6 pt-4 border-t border-forest/10 text-[10px] text-forest/40 text-center font-mono space-y-1">
-              <div>URL: {process.env.NEXT_PUBLIC_SUPABASE_URL ? `${process.env.NEXT_PUBLIC_SUPABASE_URL.substring(0, 22)}...` : 'MISSING'}</div>
-              <div>KEY: {process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? `${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY.substring(0, 18)}...` : 'MISSING'}</div>
-            </div>
           </div>
         ) : (
           /* Dashboard View */
